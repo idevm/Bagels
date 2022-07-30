@@ -1,7 +1,7 @@
 import random
 
-NUM_DIGITS = 3
-MAX_GUESSES = 10
+NUM_DIGITS: int = 3
+MAX_GUESSES: int = 10
 
 def main():
     print(f"""Бейглз, дедуктивная логическая игра
@@ -12,18 +12,18 @@ def main():
     - Bagels - нет такой цифры""")
 
     while True:
-        secretNum = getSecretNum()
+        secretNum: str = getSecretNum()
         print("Я загадал число")
 
 
-        numGuesses = 1
+        numGuesses: int = 1
         while numGuesses <= MAX_GUESSES:
-            guess = ""
+            guess: str = ""
             while len(guess) != NUM_DIGITS or not guess.isdecimal():
                 print(f"Попытка {numGuesses}: ")
                 guess = input("> ")
 
-            clues = getClues(guess, secretNum)
+            clues: str = getClues(guess, secretNum)
             print(clues)
             numGuesses += 1
 
@@ -40,19 +40,19 @@ def main():
 
     print("Спасибо за игру!")
 
-def getSecretNum():
-    numbers = list("012345689")
+def getSecretNum() -> str:
+    numbers: list[str] = list("012345689")
     random.shuffle(numbers)
-    secretNum = ""
+    secretNum: str = ""
     for i in range(NUM_DIGITS):
         secretNum += str(numbers[i])
     return secretNum
 
-def getClues(guess, secretNum):
+def getClues(guess, secretNum) -> str:
     if guess == secretNum:
         return "Угадал!"
 
-    clues = []
+    clues: list[str] = []
 
     for i in range(len(guess)):
         if guess[i] == secretNum[i]:
