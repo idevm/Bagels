@@ -12,26 +12,26 @@ def main():
     - Bagels - нет такой цифры""")
 
     while True:
-        secret_num = get_secret_num()
+        secretNum = getSecretNum()
         print("Я загадал число")
 
 
-        num_guesses = 1
-        while num_guesses <= MAX_GUESSES:
+        numGuesses = 1
+        while numGuesses <= MAX_GUESSES:
             guess = ""
             while len(guess) != NUM_DIGITS or not guess.isdecimal():
-                print(f"Попытка {num_guesses}: ")
+                print(f"Попытка {numGuesses}: ")
                 guess = input("> ")
 
-            clues = get_clues(guess, secret_num)
+            clues = getClues(guess, secretNum)
             print(clues)
-            num_guesses += 1
+            numGuesses += 1
 
-            if guess == secret_num:
+            if guess == secretNum:
                 break
-            if num_guesses > MAX_GUESSES:
+            if numGuesses > MAX_GUESSES:
                 print("Закончились попытки")
-                print(f"Было загадано число {secret_num}")
+                print(f"Было загадано число {secretNum}")
                 break
                     
         print("Хотите сыграть еще? (да или нет)")
@@ -40,24 +40,24 @@ def main():
 
     print("Спасибо за игру!")
 
-def get_secret_num():
+def getSecretNum():
     numbers = list("012345689")
     random.shuffle(numbers)
-    secret_num = ""
+    secretNum = ""
     for i in range(NUM_DIGITS):
-        secret_num += str(numbers[i])
-    return secret_num
+        secretNum += str(numbers[i])
+    return secretNum
 
-def get_clues(guess, secret_num):
-    if guess == secret_num:
+def getClues(guess, secretNum):
+    if guess == secretNum:
         return "Угадал!"
 
     clues = []
 
     for i in range(len(guess)):
-        if guess[i] == secret_num[i]:
+        if guess[i] == secretNum[i]:
             clues.append("Fermi")
-        elif guess[i] in secret_num:
+        elif guess[i] in secretNum:
             clues.append("Pico")
     if len(clues) == 0:
         return "Bagels"
