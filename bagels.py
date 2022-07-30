@@ -5,6 +5,7 @@ MAX_GUESSES: int = 10
 
 def main():
     print(f"""Бейглз, дедуктивная логическая игра
+
     Я загадываю {NUM_DIGITS}-значное число с неповторяющимися цифрами.
     Попробуй угадать его с такими подсказками:
     - Pico - одна цифра угадана верно, но не на своем месте
@@ -14,30 +15,24 @@ def main():
     while True:
         secretNum: str = getSecretNum()
         print("Я загадал число")
-
-
         numGuesses: int = 1
         while numGuesses <= MAX_GUESSES:
             guess: str = ""
             while len(guess) != NUM_DIGITS or not guess.isdecimal():
                 print(f"Попытка {numGuesses}: ")
                 guess = input("> ")
-
             clues: str = getClues(guess, secretNum)
             print(clues)
             numGuesses += 1
-
             if guess == secretNum:
                 break
             if numGuesses > MAX_GUESSES:
                 print("Закончились попытки")
                 print(f"Было загадано число {secretNum}")
                 break
-                    
         print("Хотите сыграть еще? (да или нет)")
         if not input("> ").lower().startswith("д"):
             break
-
     print("Спасибо за игру!")
 
 def getSecretNum() -> str:
@@ -51,9 +46,7 @@ def getSecretNum() -> str:
 def getClues(guess, secretNum) -> str:
     if guess == secretNum:
         return "Угадал!"
-
     clues: list[str] = []
-
     for i in range(len(guess)):
         if guess[i] == secretNum[i]:
             clues.append("Fermi")
